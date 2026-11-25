@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, cite the release metadata below."
+title: "Governance-Grade Evidence Bundle Demo"
+type: software
+version: 0.7.2rc1
+license: Apache-2.0
+repository-code: "https://github.com/xiaotongzhu184-lang/financial-ai-evidence-bundle"
+authors:
+  - family-names: Zhu
+    given-names: Xiaotong
+    orcid: "https://orcid.org/0009-0000-4680-095X"
+keywords:
+  - financial AI
+  - model risk
+  - evidence bundle
+  - reproducibility
+  - transaction risk

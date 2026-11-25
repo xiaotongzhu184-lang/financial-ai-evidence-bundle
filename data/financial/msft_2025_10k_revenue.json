@@ -1,0 +1,32 @@
+{
+  "accession": "0000950170-25-100235",
+  "cik": "0000789019",
+  "classification": "public_sec_filing",
+  "concept": "RevenueFromContractWithCustomerExcludingAssessedTax",
+  "entity_name": "MICROSOFT CORPORATION",
+  "facts": [
+    {
+      "accn": "0000950170-25-100235",
+      "end": "2024-06-30",
+      "filed": "2025-07-30",
+      "form": "10-K",
+      "start": "2023-07-01",
+      "unit": "USD",
+      "val": 245122000000
+    },
+    {
+      "accn": "0000950170-25-100235",
+      "end": "2025-06-30",
+      "filed": "2025-07-30",
+      "form": "10-K",
+      "start": "2024-07-01",
+      "unit": "USD",
+      "val": 281724000000
+    }
+  ],
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+  "raw_source_sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
+  "retrieved_utc": "2026-10-04T21:28:05.892924+00:00",
+  "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+  "taxonomy": "us-gaap"
+}

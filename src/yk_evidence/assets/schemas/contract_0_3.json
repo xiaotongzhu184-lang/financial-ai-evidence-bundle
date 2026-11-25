@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/xiaotongzhu184-lang/financial-ai-evidence-bundle/blob/main/src/yk_evidence/assets/schemas/contract_0_3.json",
+  "title": "Governance evidence bundle contract 0.3",
+  "description": "Structural schemas for the JSON artifacts; the verifier also checks hashes and cross-file semantics.",
+  "x-artifacts": {
+    "bundle_manifest.json": "#/$defs/bundle_manifest",
+    "run_metadata.json": "#/$defs/run_metadata",
+    "input_manifest.json": "#/$defs/input_manifest",
+    "provenance.json": "#/$defs/provenance",
+    "lineage.json": "#/$defs/lineage",
+    "retrieval_evidence.json": "#/$defs/retrieval_evidence",
+    "model_metadata.json": "#/$defs/model_metadata",
+    "metrics.json": "#/$defs/metrics",
+    "drift_report.json": "#/$defs/drift_report",
+    "release_gate.json": "#/$defs/release_gate",
+    "decision_impact.json": "#/$defs/decision_impact"
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"},
+    "bundle_manifest": {
+      "type": "object",
+      "required": ["schema_version", "project_version", "run_id", "source_classification", "required_artifacts", "artifacts"],
+      "properties": {
+        "schema_version": {"const": "0.3"},
+        "project_version": {"type": "string", "minLength": 1},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "source_classification": {"type": "string", "minLength": 1},
+        "required_artifacts": {"type": "array", "minItems": 12, "uniqueItems": true, "items": {"type": "string"}},
+        "artifacts": {"type": "object", "minProperties": 12, "propertyNames": {"pattern": "^[^/\\\\]+$"}, "additionalProperties": {"$ref": "#/$defs/sha256"}}
+      }
+    },
+    "run_metadata": {
+      "type": "object",
+      "required": ["schema_version", "run_id", "project_version", "utc_time", "code_sha256", "seed", "source_classification"],
+      "properties": {
+        "schema_version": {"const": "0.3"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "project_version": {"type": "string", "minLength": 1},
+        "utc_time": {"type": "string", "format": "date-time"},
+        "code_sha256": {"$ref": "#/$defs/sha256"},
+        "seed": {"type": "integer"},
+        "source_classification": {"type": "string", "minLength": 1},
+        "code_revision": {"type": ["string", "null"]},
+        "python_version": {"type": "string"}
+      }
+    },
+    "input_manifest": {
+      "type": "object",
+      "required": ["run_id", "inputs"],
+      "properties": {
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "inputs": {"type": "array", "minItems": 2, "items": {"type": "object", "required": ["path", "sha256", "classification"], "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "#/$defs/sha256"},
+          "classification": {"type": "string", "minLength": 1},
+          "accession": {"type": "string"},
+          "seed": {"type": "integer"},
+          "row_count": {"type": "integer", "minimum": 0}
+        }}}
+      }
+    },
+    "provenance": {
+      "type": "object", "required": ["run_id", "finance", "transactions"],
+      "properties": {"run_id": {"$ref": "#/$defs/run_id"}, "finance": {"type": "object", "required": ["source_url", "accession", "snapshot_sha256"]}, "transactions": {"type": "object", "required": ["classification", "generator", "seed"]}}
+    },
+    "lineage": {
+      "type": "object", "required": ["run_id", "input_sha256", "result_sha256", "split", "governance_lineage"],
+      "properties": {"run_id": {"$ref": "#/$defs/run_id"}, "input_sha256": {"type": "object"}, "result_sha256": {"type": "object"}, "split": {"type": "object"}, "governance_lineage": {"type": "object"}}
+    },
+    "retrieval_evidence": {
+      "type": "object", "required": ["run_id", "question", "answer", "status", "source_snapshot_sha256", "citations", "method", "retrieval_mode", "formal_rag"],
+      "properties": {"run_id": {"$ref": "#/$defs/run_id"}, "question": {"type": "string"}, "answer": {"type": "string"}, "status": {"type": "string"}, "source_snapshot_sha256": {"$ref": "#/$defs/sha256"}, "citations": {"type": "array"}, "method": {"type": "string"}, "retrieval_mode": {"const": "structured_fact_lookup"}, "formal_rag": {"const": false}}
+    },
+    "model_metadata": {
+      "type": "object", "required": ["run_id", "data_classification", "models", "selected_stress_model"],
+      "properties": {"run_id": {"$ref": "#/$defs/run_id"}, "data_classification": {"type": "string"}, "models": {"type": "object", "minProperties": 1}, "selected_stress_model": {"type": "object", "required": ["model_id", "model_sha256"]}}
+    },
+    "metrics": {
+      "type": "object", "required": ["run_id", "data_classification", "definitions", "models", "stability_runs", "external_validity"],
+      "properties": {"run_id": {"$ref": "#/$defs/run_id"}, "data_classification": {"type": "string"}, "definitions": {"type": "object"}, "models": {"type": "object", "minProperties": 1}, "stability_runs": {"type": "array"}, "external_validity": {"type": "string"}}
+    },
+    "drift_report": {
+      "type": "object", "required": ["run_id", "drift", "scenarios", "classification"],
+      "properties": {"run_id": {"$ref": "#/$defs/run_id"}, "drift": {"type": "object"}, "scenarios": {"type": "array"}, "classification": {"type": "string"}}
+    },
+    "decision_impact": {
+      "type": "object",
+      "required": ["run_id", "source_classification", "assumption_status", "policy_scenarios", "models", "limitations"],
+      "properties": {
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "source_classification": {"type": "string", "minLength": 1},
+        "assumption_status": {"const": "illustrative_not_observed_operating_costs"},
+        "policy_scenarios": {"type": "array", "minItems": 1},
+        "models": {"type": "object", "minProperties": 1},
+        "limitations": {"type": "string", "minLength": 1}
+      }
+    },
+    "release_gate": {
+      "type": "object", "required": ["run_id", "status", "reasons", "data_quality_gate", "scope"],
+      "properties": {"run_id": {"$ref": "#/$defs/run_id"}, "status": {"enum": ["pass", "blocked", "error"]}, "reasons": {"type": "array", "items": {"type": "string"}}, "data_quality_gate": {"type": "object"}, "scope": {"type": "string"}}
+    }
+  }
+}

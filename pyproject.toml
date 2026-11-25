@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=77", "wheel>=0.45"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yk-governance-evidence-bundle"
+description = "Local financial AI evidence bundle research demonstration"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+authors = [{name = "Xiaotong Zhu"}]
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+dependencies = ["tenacity==9.2.1", "scikit-learn==1.9.1", "jsonschema==4.26.0", "duckdb==2.0.1", "certifi==2026.11.20", "xgboost-cpu==3.4.1; platform_system == 'Linux'", "xgboost==3.4.1; platform_system != 'Linux'"]
+dynamic = ["version"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+[project.urls]
+Homepage = "https://github.com/xiaotongzhu184-lang/financial-ai-evidence-bundle"
+Repository = "https://github.com/xiaotongzhu184-lang/financial-ai-evidence-bundle"
+Issues = "https://github.com/xiaotongzhu184-lang/financial-ai-evidence-bundle/issues"
+
+[project.scripts]
+yk-evidence = "yk_evidence.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+yk_evidence = ["assets/VERSION", "assets/examples/*.txt", "assets/examples/*.csv", "assets/data/financial/*.json", "assets/docs/project/*.md", "assets/schemas/*.json"]
+"yk_evidence._vendor" = ["*.txt"]
+
+[tool.setuptools.dynamic]
+version = {file = "VERSION"}

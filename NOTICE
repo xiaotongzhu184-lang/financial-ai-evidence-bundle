@@ -1,0 +1,13 @@
+Governance-Grade Evidence Bundle Demo
+Copyright 2026 Xiaotong Zhu
+
+This product includes an adapted numerical PSI calculation derived from
+Evidently AI, Inc. source code. The retained copyright, Apache License 2.0,
+source revision and modification notice are in:
+
+  src/yk_evidence/_vendor/evidently_psi.py
+  src/yk_evidence/_vendor/EVIDENTLY_LICENSE.txt
+
+Other installed dependencies and methodological references are identified in
+THIRD_PARTY_NOTICES.md and PROVENANCE.md. Those components retain their own
+copyrights and license terms.
